@@ -115,17 +115,10 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
       hostNetwork: true
       containers:
       - name: config-zookeeper
-        image: ""docker.io\/opencontrailnightly"/contrail-external-zookeeper:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-external-zookeeper:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -165,23 +158,17 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       hostNetwork: true
       initContainers:
       - name: contrail-node-init
-        image: ""docker.io\/opencontrailnightly"/contrail-node-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-node-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         env:
         - name: NODE_TYPE
           value: "database"
         - name: CONTRAIL_STATUS_IMAGE
-          value: ""docker.io\/opencontrailnightly"/contrail-status:"latest""
+          value: ""docker.io\/opencontrailnightly"/contrail-status:{{ CONTRAIL_RELEASE }}"
         envFrom:
         - configMapRef:
             name: contrail-analyticsdb-config
@@ -194,7 +181,7 @@ spec:
           name: host-var-lib
       containers:
       - name: contrail-analyticsdb-nodemgr
-        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
@@ -216,7 +203,7 @@ spec:
         - mountPath: /mnt
           name: docker-unix-socket
       - name: contrail-analyticsdb
-        image: ""docker.io\/opencontrailnightly"/contrail-external-cassandra:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-external-cassandra:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         env:
         - name: NODE_TYPE
@@ -230,7 +217,7 @@ spec:
         - mountPath: /var/log/cassandra
           name: analyticsdb-logs
       - name: contrail-analytics-query-engine
-        image: ""docker.io\/opencontrailnightly"/contrail-analytics-query-engine:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-analytics-query-engine:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
@@ -282,17 +269,10 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
       hostNetwork: true
       containers:
       - name: contrail-configdb
-        image: ""docker.io\/opencontrailnightly"/contrail-external-cassandra:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-external-cassandra:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         env:
         - name: NODE_TYPE
@@ -333,23 +313,17 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       hostNetwork: true
       initContainers:
       - name: contrail-node-init
-        image: ""docker.io\/opencontrailnightly"/contrail-node-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-node-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
         env:
         - name: CONTRAIL_STATUS_IMAGE
-          value: ""docker.io\/opencontrailnightly"/contrail-status:"latest""
+          value: ""docker.io\/opencontrailnightly"/contrail-status:{{ CONTRAIL_RELEASE }}"
         envFrom:
         - configMapRef:
             name: env
@@ -358,7 +332,7 @@ spec:
           name: host-usr-bin
       containers:
       - name: contrail-config-database-nodemgr
-        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -413,23 +387,17 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       hostNetwork: true
       initContainers:
       - name: contrail-node-init
-        image: ""docker.io\/opencontrailnightly"/contrail-node-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-node-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
         env:
         - name: CONTRAIL_STATUS_IMAGE
-          value: ""docker.io\/opencontrailnightly"/contrail-status:"latest""
+          value: ""docker.io\/opencontrailnightly"/contrail-status:{{ CONTRAIL_RELEASE }}"
         envFrom:
         - configMapRef:
             name: env
@@ -440,7 +408,7 @@ spec:
           name: host-usr-bin
       containers:
       - name: contrail-analytics-api
-        image: ""docker.io\/opencontrailnightly"/contrail-analytics-api:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-analytics-api:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -451,7 +419,7 @@ spec:
         - mountPath: /var/log/contrail
           name: analytics-logs
       - name: contrail-analytics-collector
-        image: ""docker.io\/opencontrailnightly"/contrail-analytics-collector:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-analytics-collector:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -460,7 +428,7 @@ spec:
         - mountPath: /var/log/contrail
           name: analytics-logs
       - name: contrail-analytics-nodemgr
-        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -513,23 +481,17 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       hostNetwork: true
       initContainers:
       - name: contrail-node-init
-        image: ""docker.io\/opencontrailnightly"/contrail-node-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-node-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         env:
         - name: NODE_TYPE
           value: "analytics-snmp"
         - name: CONTRAIL_STATUS_IMAGE
-          value: ""docker.io\/opencontrailnightly"/contrail-status:"latest""
+          value: ""docker.io\/opencontrailnightly"/contrail-status:{{ CONTRAIL_RELEASE }}"
         envFrom:
         - configMapRef:
             name: env
@@ -544,7 +506,7 @@ spec:
           name: host-var-lib
       containers:
       - name: contrail-analytics-snmp-collector
-        image: ""docker.io\/opencontrailnightly"/contrail-analytics-snmp-collector:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-analytics-snmp-collector:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
@@ -558,7 +520,7 @@ spec:
         - name: NODE_TYPE
           value: analytics-snmp
       - name: contrail-analytics-snmp-topology
-        image: ""docker.io\/opencontrailnightly"/contrail-analytics-snmp-topology:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-analytics-snmp-topology:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
@@ -572,7 +534,7 @@ spec:
         - name: NODE_TYPE
           value: analytics-snmp
       - name: contrail-analytics-snmp-nodemgr
-        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
@@ -625,23 +587,17 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       hostNetwork: true
       initContainers:
       - name: contrail-node-init
-        image: ""docker.io\/opencontrailnightly"/contrail-node-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-node-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         env:
         - name: NODE_TYPE
           value: "analytics-alarm"
         - name: CONTRAIL_STATUS_IMAGE
-          value: ""docker.io\/opencontrailnightly"/contrail-status:"latest""
+          value: ""docker.io\/opencontrailnightly"/contrail-status:{{ CONTRAIL_RELEASE }}"
         envFrom:
         - configMapRef:
             name: env
@@ -656,7 +612,7 @@ spec:
           name: host-var-lib
       containers:
       - name: kafka
-        image: ""docker.io\/opencontrailnightly"/contrail-external-kafka:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-external-kafka:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
@@ -669,7 +625,7 @@ spec:
         - configMapRef:
             name: analyticszookeeperenv
       - name: contrail-analytics-alarm-gen
-        image: ""docker.io\/opencontrailnightly"/contrail-analytics-alarm-gen:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-analytics-alarm-gen:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
@@ -685,7 +641,7 @@ spec:
         - name: NODE_TYPE
           value: analytics-alarm
       - name: contrail-analytics-alarm-nodemgr
-        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
@@ -738,23 +694,17 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       hostNetwork: true
       initContainers:
       - name: contrail-node-init
-        image: ""docker.io\/opencontrailnightly"/contrail-node-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-node-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
         env:
         - name: CONTRAIL_STATUS_IMAGE
-          value: ""docker.io\/opencontrailnightly"/contrail-status:"latest""
+          value: ""docker.io\/opencontrailnightly"/contrail-status:{{ CONTRAIL_RELEASE }}"
         envFrom:
         - configMapRef:
             name: env
@@ -765,7 +715,7 @@ spec:
           name: host-usr-bin
       containers:
       - name: contrail-controller-control
-        image: ""docker.io\/opencontrailnightly"/contrail-controller-control-control:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-controller-control-control:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -776,7 +726,7 @@ spec:
         - mountPath: /var/log/contrail
           name: control-logs
       - name: contrail-controller-control-dns
-        image: ""docker.io\/opencontrailnightly"/contrail-controller-control-dns:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-controller-control-dns:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -789,7 +739,7 @@ spec:
         - mountPath: /var/log/contrail
           name: control-logs
       - name: contrail-controller-control-named
-        image: ""docker.io\/opencontrailnightly"/contrail-controller-control-named:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-controller-control-named:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -804,7 +754,7 @@ spec:
         - mountPath: /var/log/contrail
           name: control-logs
       - name: contrail-controller-nodemgr
-        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -859,23 +809,17 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       hostNetwork: true
       initContainers:
       - name: contrail-node-init
-        image: ""docker.io\/opencontrailnightly"/contrail-node-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-node-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
         env:
         - name: CONTRAIL_STATUS_IMAGE
-          value: ""docker.io\/opencontrailnightly"/contrail-status:"latest""
+          value: ""docker.io\/opencontrailnightly"/contrail-status:{{ CONTRAIL_RELEASE }}"
         envFrom:
         - configMapRef:
             name: env
@@ -886,7 +830,7 @@ spec:
           name: host-usr-bin
       containers:
       - name: contrail-controller-config-api
-        image: ""docker.io\/opencontrailnightly"/contrail-controller-config-api:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-controller-config-api:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -897,7 +841,7 @@ spec:
         - mountPath: /var/log/contrail
           name: config-logs
       - name: contrail-controller-config-devicemgr
-        image: ""docker.io\/opencontrailnightly"/contrail-controller-config-devicemgr:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-controller-config-devicemgr:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -908,7 +852,7 @@ spec:
         - mountPath: /var/log/contrail
           name: config-logs
       - name: contrail-controller-config-schema
-        image: ""docker.io\/opencontrailnightly"/contrail-controller-config-schema:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-controller-config-schema:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -919,7 +863,7 @@ spec:
         - mountPath: /var/log/contrail
           name: config-logs
       - name: contrail-controller-config-svcmonitor
-        image: ""docker.io\/opencontrailnightly"/contrail-controller-config-svcmonitor:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-controller-config-svcmonitor:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -930,7 +874,7 @@ spec:
         - mountPath: /var/log/contrail
           name: config-logs
       - name: contrail-controller-config-nodemgr
-        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -989,23 +933,17 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       hostNetwork: true
       initContainers:
       - name: contrail-node-init
-        image: ""docker.io\/opencontrailnightly"/contrail-node-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-node-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
         env:
         - name: CONTRAIL_STATUS_IMAGE
-          value: ""docker.io\/opencontrailnightly"/contrail-status:"latest""
+          value: ""docker.io\/opencontrailnightly"/contrail-status:{{ CONTRAIL_RELEASE }}"
         envFrom:
         - configMapRef:
             name: env
@@ -1016,7 +954,7 @@ spec:
           name: host-usr-bin
       containers:
       - name: contrail-controller-webui-job
-        image: ""docker.io\/opencontrailnightly"/contrail-controller-webui-job:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-controller-webui-job:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -1027,7 +965,7 @@ spec:
         - mountPath: /var/log/contrail
           name: webui-logs
       - name: contrail-controller-webui-web
-        image: ""docker.io\/opencontrailnightly"/contrail-controller-webui-web:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-controller-webui-web:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -1065,13 +1003,7 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       hostNetwork: true
       containers:
       - name: redis
@@ -1110,17 +1042,11 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       hostNetwork: true
       containers:
       - name: rabbitmq
-        image: ""docker.io\/opencontrailnightly"/contrail-external-rabbitmq:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-external-rabbitmq:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         env:
         - name: NODE_TYPE
@@ -1165,24 +1091,18 @@ spec:
             - matchExpressions:
               - key: "node-role.kubernetes.io/master"
                 operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       automountServiceAccountToken: false
       hostNetwork: true
       initContainers:
       - name: contrail-node-init
-        image: ""docker.io\/opencontrailnightly"/contrail-node-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-node-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
         env:
         - name: CONTRAIL_STATUS_IMAGE
-          value: ""docker.io\/opencontrailnightly"/contrail-status:"latest""
+          value: ""docker.io\/opencontrailnightly"/contrail-status:{{ CONTRAIL_RELEASE }}"
         envFrom:
         - configMapRef:
             name: env
@@ -1193,7 +1113,7 @@ spec:
           name: host-usr-bin
       containers:
       - name: contrail-kube-manager
-        image: ""docker.io\/opencontrailnightly"/contrail-kubernetes-kube-manager:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-kubernetes-kube-manager:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -1231,24 +1151,18 @@ spec:
       labels:
         app: contrail-agent
     spec:
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node.kubernetes.io/not-ready
-        operator: Exists
-        effect: NoSchedule
+
       automountServiceAccountToken: false
       hostNetwork: true
       initContainers:
       - name: contrail-node-init
-        image: ""docker.io\/opencontrailnightly"/contrail-node-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-node-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
         env:
         - name: CONTRAIL_STATUS_IMAGE
-          value: ""docker.io\/opencontrailnightly"/contrail-status:"latest""
+          value: ""docker.io\/opencontrailnightly"/contrail-status:{{ CONTRAIL_RELEASE }}"
         envFrom:
         - configMapRef:
             name: env
@@ -1258,7 +1172,7 @@ spec:
         - mountPath: /host/usr/bin
           name: host-usr-bin
       - name: contrail-vrouter-kernel-init
-        image: ""docker.io\/opencontrailnightly"/contrail-vrouter-kernel-build-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-vrouter-kernel-build-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
@@ -1277,7 +1191,7 @@ spec:
         - mountPath: /host/bin
           name: host-bin
       - name: contrail-kubernetes-cni-init
-        image: ""docker.io\/opencontrailnightly"/contrail-kubernetes-cni-init:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-kubernetes-cni-init:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -1297,7 +1211,7 @@ spec:
           name: agent-logs
       containers:
       - name: contrail-vrouter-agent
-        image: ""docker.io\/opencontrailnightly"/contrail-vrouter-agent:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-vrouter-agent:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         # TODO: Priveleged mode is requied because w/o it the device /dev/net/tun
         # is not present in the container. The mounting it into container
@@ -1330,7 +1244,7 @@ spec:
         - mountPath: /tmp/serviceaccount
           name: pod-secret
       - name: contrail-agent-nodemgr
-        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:"latest""
+        image: ""docker.io\/opencontrailnightly"/contrail-nodemgr:{{ CONTRAIL_RELEASE }}"
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
